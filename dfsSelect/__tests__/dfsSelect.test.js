@@ -1,20 +1,21 @@
+/*eslint no-undef: 0*/
+/*eslint-env node*/
+
 import Tree from '../dfsSelect'
 
 describe('Tree', function() {
   it('should exist', function() {
-    // Oh no! the `Tree` class doesn't exist but it was provided for you. Maybe
-    // you deleted the code that defines the class by mistake?
     expect(Tree).toBeDefined()
   })
 })
 
 describe('DFSelect', function() {
   it('should exist on the Tree prototype', function() {
-    should.exist(Tree.prototype.DFSelect)
+    expect(Tree.prototype.DFSelect).toBeDefined()
   })
 
   it('should be a function', function() {
-    Tree.prototype.DFSelect.should.be.a.Function
+    expect(Tree.prototype.DFSelect).toBeInstanceOf(Function)
   })
 
   it('should return an array', function() {
@@ -22,7 +23,7 @@ describe('DFSelect', function() {
     var all = function() {
       return true
     }
-    Array.isArray(root.DFSelect(all)).should.equal(true)
+    expect(Array.isArray(root.DFSelect(all))).toBeTruthy()
   })
 
   it('should return all nodes in the tree if filter always returns true', function() {
@@ -48,8 +49,8 @@ describe('DFSelect', function() {
 
     // we should expect back all the nodes we added
     var result = root.DFSelect(all)
-    result.should.have.length(expected.length)
-    result.should.deep.equal(expected)
+    expect(result).toHaveLength(expected.length)
+    expect(result).toEqual(expected)
   })
 
   it('should return all nodes passing the filter', function() {
@@ -82,11 +83,11 @@ describe('DFSelect', function() {
 
     result = root.DFSelect(trueFilter)
     // we expect back all the `trueNodes` using the `trueFilter`
-    result.should.deep.equal(trueNodes)
+    expect(result).toEqual(trueNodes)
 
     result = root.DFSelect(falseFilter)
     // we expect back all the `falseNodes` using the `falseFilter`
-    result.should.deep.equal(falseNodes)
+    expect(result).toEqual(falseNodes)
   })
 
   it('should allow filtering by depth', function() {
@@ -118,9 +119,9 @@ describe('DFSelect', function() {
     root.children[1].children[0].addChild(10)
     nodeDepths.push([7, 8, 9, 10])
 
-    root.DFSelect(depthFilter(0)).should.deep.equal(nodeDepths[0])
-    root.DFSelect(depthFilter(1)).should.deep.equal(nodeDepths[1])
-    root.DFSelect(depthFilter(2)).should.deep.equal(nodeDepths[2])
-    root.DFSelect(depthFilter(3)).should.deep.equal(nodeDepths[3])
+    expect(root.DFSelect(depthFilter(0))).toEqual(nodeDepths[0])
+    expect(root.DFSelect(depthFilter(1))).toEqual(nodeDepths[1])
+    expect(root.DFSelect(depthFilter(2))).toEqual(nodeDepths[2])
+    expect(root.DFSelect(depthFilter(3))).toEqual(nodeDepths[3])
   })
 })

@@ -5,7 +5,18 @@ class Tree {
   }
 
   DFSelect(filter) {
-    /* Enter your code here */
+    let results = []
+    const recurse = (node, depth) => {
+      if (filter(node.value, depth)) {
+        results.push(node.value)
+      }
+      for (let i = 0; i < node.children.length; i++) {
+        let child = node.children[i]
+        recurse(child, depth + 1)
+      }
+    }
+    recurse(this, 0)
+    return results
   }
 
   addChild(child) {
