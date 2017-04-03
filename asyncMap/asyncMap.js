@@ -1,0 +1,1 @@
+const asyncMap (tasks, cb) => {}
